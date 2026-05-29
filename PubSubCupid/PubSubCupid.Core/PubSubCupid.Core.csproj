@@ -42,9 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Matching\CupidMatchmaker.cs" />
+    <Compile Include="Matching\CupidScoring.cs" />
     <Compile Include="Models\MatchScore.cs" />
     <Compile Include="Models\SinglePerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Randomness\SecureRandomPoints.cs" />
     <Compile Include="State\RegisteredSinglesStore.cs" />
   </ItemGroup>
   <ItemGroup>
