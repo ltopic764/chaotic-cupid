@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +45,10 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContracts\ICupidDesk.cs" />
+    <Compile Include="ServiceContracts\ISinglePersonCallback.cs" />
+    <Compile Include="TransferObjects\ProfileDTO.cs" />
+    <Compile Include="TransferObjects\LoveLetterDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ServiceContracts\.gitkeep" />
