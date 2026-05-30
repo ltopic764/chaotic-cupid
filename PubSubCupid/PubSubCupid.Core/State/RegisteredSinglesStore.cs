@@ -26,7 +26,7 @@ namespace PubSubCupid.Core.State
 
         public bool UsernameExists(string username)
         {
-            return _registeredSingles.Any(person => person.Username == username);
+            return _registeredSingles.Any(person => person.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
         }
 
         public void Add(SinglePerson person)
@@ -36,7 +36,7 @@ namespace PubSubCupid.Core.State
 
         public SinglePerson FindByUsername(string username)
         {
-            return _registeredSingles.FirstOrDefault(person => person.Username == username);
+            return _registeredSingles.FirstOrDefault(person => person.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
         }
     }
 }
