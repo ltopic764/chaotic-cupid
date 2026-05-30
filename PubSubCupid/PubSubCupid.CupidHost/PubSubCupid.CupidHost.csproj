@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,10 +46,21 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ChaoticCupidService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Services\.gitkeep" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PubSubCupid.Contracts\PubSubCupid.Contracts.csproj">
+      <Project>{4bdf010f-673f-4fc6-a4a8-8e9fd8313d0b}</Project>
+      <Name>PubSubCupid.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PubSubCupid.Core\PubSubCupid.Core.csproj">
+      <Project>{372af2d9-3d74-4371-925c-e3cad139bab6}</Project>
+      <Name>PubSubCupid.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
