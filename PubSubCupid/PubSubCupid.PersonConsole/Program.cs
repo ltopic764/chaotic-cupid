@@ -7,6 +7,7 @@ using System.ServiceModel;
 using PubSubCupid.Contracts.ServiceContracts;
 using PubSubCupid.Contracts.TransferObjects;
 using PubSubCupid.PersonConsole.Callback;
+using PubSubCupid.PersonConsole.Input;
 
 namespace PubSubCupid.PersonConsole
 {
@@ -26,14 +27,8 @@ namespace PubSubCupid.PersonConsole
             DuplexChannelFactory<ICupidDesk> factory = new DuplexChannelFactory<ICupidDesk>(context, "CupidEndpoint");
             ICupidDesk proxy = factory.CreateChannel();
 
-            // Test podaci
-            ProfileDTO profile = new ProfileDTO
-            {
-                Username = "Pera",
-                City = "Novi Sad",
-                Age = 22,
-                Phonenumber = "060123456"
-            };
+            // citaj korisnicki unos
+            ProfileDTO profile = ConsoleProfileReader.ReadProfile();
 
             bool success = proxy.InitSinglePerson(profile);
 
