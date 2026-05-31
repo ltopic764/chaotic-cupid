@@ -24,6 +24,8 @@ namespace PubSubCupid.PersonConsole.Callback
             Console.WriteLine($"Phone: {letter.FromPhonenumber}");
             Console.WriteLine($" '{letter.CupidMessage}' ");
             Console.WriteLine("##########################");
+
+            Console.WriteLine("Type /confirm to confirm this letter");
             Console.WriteLine();
         }
     }
