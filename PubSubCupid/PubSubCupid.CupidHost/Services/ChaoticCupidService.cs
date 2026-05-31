@@ -51,7 +51,16 @@ namespace PubSubCupid.CupidHost.Services
 
         public void ConfirmPreviousLetter(string username)
         {
-            throw new NotImplementedException();
+            SinglePerson person = _store.FindByUsername(username);
+
+            if (person == null)
+            {
+                Console.WriteLine($"Confirm failed. User {username} not found");
+                return;
+            }
+
+            person.WaitingForConfirmation = false;
+            Console.WriteLine($"{username} confirmed previous letter");
         }
         public void BlockPerson(string username, string blockedUsername)
         {

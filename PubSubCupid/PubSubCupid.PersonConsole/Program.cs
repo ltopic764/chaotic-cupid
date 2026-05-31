@@ -43,9 +43,29 @@ namespace PubSubCupid.PersonConsole
             }
 
             Console.WriteLine();
-            Console.WriteLine("Press ENTER to exit");
+            Console.WriteLine("What you can do now:");
+            Console.WriteLine("/confirm - confirm received love letter");
+            Console.WriteLine("/exit - close application");
+            Console.WriteLine();
 
-            Console.ReadLine();
+            while (true)
+            {
+                string command = Console.ReadLine();
+
+                if (command == "/confirm")
+                {
+                    proxy.ConfirmPreviousLetter(profile.Username);
+                }
+                else if (command == "/exit")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Unknow command");
+                }
+            }
+
         }
     }
 }
