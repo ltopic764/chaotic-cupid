@@ -15,6 +15,7 @@ namespace PubSubCupid.Contracts.TransferObjects
         [DataMember]
         public string FromUsername { get; set; }
 
+        [DataMember]
         // Grad osobe od koje nam stize pismo
         public string FromCity { get; set; }
 
