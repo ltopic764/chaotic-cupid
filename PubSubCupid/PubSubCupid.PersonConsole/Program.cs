@@ -46,6 +46,7 @@ namespace PubSubCupid.PersonConsole
             Console.WriteLine("What you can do now:");
             Console.WriteLine("/confirm - confirm received love letter");
             Console.WriteLine("/exit - close application");
+            Console.WriteLine("/block 'username' - block a user to not receive letters from them");
             Console.WriteLine();
 
             while (true)
@@ -59,6 +60,18 @@ namespace PubSubCupid.PersonConsole
                 else if (command == "/exit")
                 {
                     break;
+                }
+                else if (command.StartsWith("/block "))
+                {
+                    string blockedUsername = command.Substring("/block ".Length).Trim();
+
+                    if (string.IsNullOrWhiteSpace(blockedUsername))
+                    {
+                        Console.WriteLine("Usage: /block 'username'");
+                        continue;
+                    }
+
+                    proxy.BlockPerson(profile.Username, blockedUsername);
                 }
                 else
                 {

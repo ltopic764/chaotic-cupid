@@ -62,9 +62,24 @@ namespace PubSubCupid.CupidHost.Services
             person.WaitingForConfirmation = false;
             Console.WriteLine($"{username} confirmed previous letter");
         }
+
         public void BlockPerson(string username, string blockedUsername)
         {
-            throw new NotImplementedException();
+            SinglePerson person = _store.FindByUsername(username);
+
+            if (person == null)
+            {
+                Console.WriteLine($"Block failed. User {username} not found");
+                return;
+            }
+
+            if (string.Equals(username, blockedUsername, System.StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"{username} tried to block himself/herself");
+            }
+
+            person.BlockedUsernames.Add(blockedUsername);
+            Console.WriteLine($"{username} has blocked {blockedUsername}");
         }
 
         private void CupidTimerElapsed(object sender, ElapsedEventArgs e)
