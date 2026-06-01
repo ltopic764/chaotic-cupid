@@ -28,12 +28,6 @@ namespace PubSubCupid.Core.Matching
                     continue;
                 }
 
-                // Cekamo da korisnik potvrdi da je primio pismo
-                if (candidate.WaitingForConfirmation)
-                {
-                    continue;
-                }
-
                 int score = CupidScoring.CalculateScore(person, candidate);
 
                 if (bestMatch == null || score > bestMatch.Score)
