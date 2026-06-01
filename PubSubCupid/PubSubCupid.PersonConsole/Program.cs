@@ -42,11 +42,13 @@ namespace PubSubCupid.PersonConsole
                 Console.WriteLine("Username already exists");
             }
 
+
             Console.WriteLine();
             Console.WriteLine("What you can do now:");
             Console.WriteLine("/confirm - confirm received love letter");
-            Console.WriteLine("/exit - close application");
             Console.WriteLine("/block 'username' - block a user to not receive letters from them");
+            Console.WriteLine("/help");
+            Console.WriteLine("/exit - close application");
             Console.WriteLine();
 
             while (true)
@@ -71,7 +73,23 @@ namespace PubSubCupid.PersonConsole
                         continue;
                     }
 
-                    proxy.BlockPerson(profile.Username, blockedUsername);
+                    bool blocked = proxy.BlockPerson(profile.Username, blockedUsername);
+
+                    if (blocked)
+                    {
+                        Console.WriteLine($"You blocked {blockedUsername}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot block this user. User does not exist or input is invalid");
+                    }
+                }
+                else if (command == "/help")
+                {
+                    Console.WriteLine("Available commands:");
+                    Console.WriteLine("/confirm - confirm received love letter");
+                    Console.WriteLine("/block 'username' - block a user");
+                    Console.WriteLine("/exit - close application");
                 }
                 else
                 {
