@@ -63,23 +63,25 @@ namespace PubSubCupid.CupidHost.Services
             Console.WriteLine($"{username} confirmed previous letter");
         }
 
-        public void BlockPerson(string username, string blockedUsername)
+        public bool BlockPerson(string username, string blockedUsername)
         {
             SinglePerson person = _store.FindByUsername(username);
+            SinglePerson blockedPerson = _store.FindByUsername(blockedUsername);
 
-            if (person == null)
+            if (person == null || blockedPerson == null)
             {
-                Console.WriteLine($"Block failed. User {username} not found");
-                return;
+                return false;
             }
 
             if (string.Equals(username, blockedUsername, System.StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine($"{username} tried to block himself/herself");
+                return false;
             }
 
             person.BlockedUsernames.Add(blockedUsername);
             Console.WriteLine($"{username} has blocked {blockedUsername}");
+            return true;
         }
 
         private void CupidTimerElapsed(object sender, ElapsedEventArgs e)

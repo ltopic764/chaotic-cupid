@@ -23,6 +23,6 @@ namespace PubSubCupid.Contracts.ServiceContracts
 
         // Korisnik moze da blokira drugog korisnika
         [OperationContract]
-        void BlockPerson(string username, string blockedUsername);
+        bool BlockPerson(string username, string blockedUsername);
     }
 }

@@ -13,6 +13,7 @@ namespace PubSubCupid.Core.State
     {
         // Sve trenutno prijavljene osobe
         private readonly List<SinglePerson> _registeredSingles;
+        private readonly object _lock = new object();
 
         public RegisteredSinglesStore()
         {
@@ -21,22 +22,34 @@ namespace PubSubCupid.Core.State
 
         public IReadOnlyCollection<SinglePerson> GetAll()
         {
-            return _registeredSingles.AsReadOnly();
+            lock (_lock)
+            {
+                return _registeredSingles.ToList().AsReadOnly();
+            }
         }
 
         public bool UsernameExists(string username)
         {
-            return _registeredSingles.Any(person => person.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
+            lock (_lock)
+            {
+                return _registeredSingles.Any(person => person.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
+            }
         }
 
         public void Add(SinglePerson person)
         {
-            _registeredSingles.Add(person);
+            lock (_lock)
+            {
+                _registeredSingles.Add(person);
+            }
         }
 
         public SinglePerson FindByUsername(string username)
         {
-            return _registeredSingles.FirstOrDefault(person => person.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
+            lock (_lock)
+            {
+                return _registeredSingles.FirstOrDefault(person => person.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
+            }
         }
     }
 }

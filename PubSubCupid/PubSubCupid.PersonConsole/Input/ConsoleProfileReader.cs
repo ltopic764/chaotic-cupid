@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PubSubCupid.Contracts.TransferObjects;
+using System.Text.RegularExpressions;
 
 namespace PubSubCupid.PersonConsole.Input
 {
@@ -14,7 +15,7 @@ namespace PubSubCupid.PersonConsole.Input
             string username = ReadRequiredText("Enter username: ");
             string city = ReadRequiredText("Enter city: ");
             int age = ReadPositiveNumber("Enter age: ");
-            string phone = ReadRequiredText("Enter phone number: ");
+            string phone = ReadPhoneNumber("Enter phone number: ");
 
             return new ProfileDTO
             {
@@ -33,12 +34,47 @@ namespace PubSubCupid.PersonConsole.Input
 
                 string input = Console.ReadLine();
 
-                if (!string.IsNullOrWhiteSpace(input))
+                if (string.IsNullOrWhiteSpace(input))
                 {
-                    return input.Trim();
+                    Console.WriteLine("Input cannot be empty");
+                    continue;
                 }
 
-                Console.WriteLine("Input cannot be empty");
+                input = input.Trim();
+
+                if (!Regex.IsMatch(input, @"^[A-Za-zČĆŽŠĐčćžšđ\s]+$"))
+                {
+                    Console.WriteLine("Only letters are allowed");
+                    continue;
+                }
+
+                return input;
+            }
+        }
+
+        private static string ReadPhoneNumber(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Phone number cannot be empty");
+                    continue;
+                }
+
+                input = input.Trim();
+
+                if (!Regex.IsMatch(input, @"^[0-9]+$"))
+                {
+                    Console.WriteLine("Phone number can contain only digits");
+                    continue;
+                }
+
+                return input;
             }
         }
 
