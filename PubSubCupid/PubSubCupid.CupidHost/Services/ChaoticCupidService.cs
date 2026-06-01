@@ -92,6 +92,20 @@ namespace PubSubCupid.CupidHost.Services
             SendLettersToEveryone();
         }
 
+        private string GetRandomCupidMessage()
+        {
+            string[] messages =
+            {
+                "Looking forward to our date!",
+                "I want to meet!",
+                "Not interested"
+            };
+
+            int index = PubSubCupid.Core.Randomness.SecureRandomPoints.Next(0, messages.Length);
+
+            return messages[index];
+        }
+
         private void SendLettersToEveryone()
         {
             foreach (SinglePerson person in _store.GetAll())
@@ -112,13 +126,16 @@ namespace PubSubCupid.CupidHost.Services
 
                 //Console.WriteLine($"DEBUG matched city: {matchedPerson.City}");
 
+                string message = GetRandomCupidMessage(); // random poruka
+                bool shouldHidePhone = message == "Not interested";
+
                 LoveLetterDTO letter = new LoveLetterDTO
                 {
                     FromUsername = matchedPerson.Username,
                     FromCity = matchedPerson.City,
                     FromAge = matchedPerson.Age,
-                    FromPhonenumber = matchedPerson.Phonenumber,
-                    CupidMessage = "I want to meet"
+                    FromPhonenumber = shouldHidePhone ? string.Empty : matchedPerson.Phonenumber,
+                    CupidMessage = message
                 };
 
                 try

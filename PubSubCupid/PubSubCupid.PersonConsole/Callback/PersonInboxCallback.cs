@@ -21,7 +21,11 @@ namespace PubSubCupid.PersonConsole.Callback
             Console.WriteLine($"From: {letter.FromUsername}");
             Console.WriteLine($"City: {letter.FromCity}");
             Console.WriteLine($"Age: {letter.FromAge}");
-            Console.WriteLine($"Phone: {letter.FromPhonenumber}");
+            // ako nismo zainteresovani za upoznavanje ne ispisujemo telefon
+            if (!string.IsNullOrWhiteSpace(letter.FromPhonenumber))
+            {
+                Console.WriteLine($"Phone: {letter.FromPhonenumber}");
+            }
             Console.WriteLine($" '{letter.CupidMessage}' ");
             Console.WriteLine("##########################");
 
